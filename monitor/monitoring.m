@@ -1,17 +1,17 @@
 %% CARGA DE DATOS
 clear; clc;
 
-mon = MONITORclass("logAC5.90s.csv");
-[posX,posY,posZ,psi,Vhor]      = mon.ACinfo(5,false);
-[posXd,posYd,posZd,psid,Vhord] = mon.ACinfo(5,true);
-[dist,distXY,distZ] = mon.dist2ref(5);
-[cdist,~,~,closestAC,~] = mon.dist2ACs(5,30);
+mon = MONITORclass("logAC1.90s.velProg.csv");
+[posX,posY,posZ,psi,Vhor]      = mon.ACinfo(1,false);
+[posXd,posYd,posZd,psid,Vhord] = mon.ACinfo(1,true);
+[dist,distXY,distZ] = mon.dist2ref(1);
+[cdist,~,~,closestAC,~] = mon.dist2ACs(1,30);
 
 
-figHandler = findobj('Type','figure','Name','AC5')';
+figHandler = findobj('Type','figure','Name','AC1')';
 if isempty(figHandler)
     figure( ...
-        'Name','AC5', ...
+        'Name','AC1', ...
         'NumberTitle','off',   ...
         'Position',[1400 250 600 800]); 
 else
@@ -30,7 +30,7 @@ ax1 = nexttile;
 
 yyaxis left
 ax1.YAxis(1).Color = 'black';
-axis([300 2200 0 2500])
+axis([0 1900 0 2500])
 ylabel('altitude (m)')
 grid on
 hold on
@@ -38,8 +38,8 @@ hold on
 plot(1:mon.lastTime,posZd,'-r','LineWidth',1)
 plot(1:mon.lastTime,posZ, '-' ,'LineWidth',1)
 
-plot([1570 1570],[150 700], ':k' ,'LineWidth',1)
-text(1570,1000,{'Miss Approach','Point'},...
+plot([1169 1169],[150 700], ':k' ,'LineWidth',1)
+text(1169,1000,{'Miss Approach','Point'},...
     'FontSize',8,...
     'HorizontalAlignment','center')
 plot([1839 1839],[900 1200], ':k' ,'LineWidth',1)
@@ -50,10 +50,10 @@ text(1839,1500,{'Reinjection','Point'},...
 
 yyaxis right
 ax1.YAxis(2).Color = 'black';
-axis([300 2200 0 convlength(2500,'m','ft')])
+axis([0 1900 0 convlength(2500,'m','ft')])
 ylabel('altitude (ft)') 
 
-legend({'AC5 Dubins','AC5 flyable'},'Location','southwest')
+legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
 xticklabels(ax1,{})
 
 
@@ -62,7 +62,7 @@ ax2 = nexttile;
 
 yyaxis left
 ax2.YAxis(1).Color = 'black';
-axis([300 2200 -12 0])
+axis([0 1900 -12 0])
 ylabel('heading (rad)')
 grid on
 hold on
@@ -72,10 +72,10 @@ plot(1:mon.lastTime,psi, '-' ,'LineWidth',1)
 
 yyaxis right
 ax2.YAxis(2).Color = 'black';
-axis([300 2200 convang(-12,'rad','deg') 0])
+axis([0 1900 convang(-12,'rad','deg') 0])
 ylabel('heading (deg)') 
 
-legend({'AC5 Dubins','AC5 flyable'},'Location','southwest')
+legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
 xticklabels(ax2,{})
 
 
@@ -84,7 +84,7 @@ ax3 = nexttile;
 
 yyaxis left
 ax3.YAxis(1).Color = 'black';
-axis([300 2200 0 140])
+axis([0 1900 0 140])
 ylabel('forward speed (m/s)')
 grid on
 hold on
@@ -94,10 +94,10 @@ plot(1:mon.lastTime,Vhor, '-' ,'LineWidth',1)
  
 yyaxis right
 ax3.YAxis(2).Color = 'black';
-axis([300 2200 0 convvel(140,'m/s','kts')])
+axis([0 1900 0 convvel(140,'m/s','kts')])
 ylabel('forward speed (kt)') 
 
-legend({'AC5 Dubins','AC5 flyable'},'Location','southwest')
+legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
 xticklabels(ax3,{})
 
 
@@ -105,12 +105,12 @@ xticklabels(ax3,{})
 ax4 = nexttile;
 grid on
 hold on
-axis([300 2200 0 400])
+axis([0 1900 0 450])
 ylabel('tracking error (m)')
 
 plot(1:mon.lastTime,dist,'-' ,'LineWidth',1)
 
-legend({'AC5 flyable following AC5 Dubins'})
+legend({'AC1 flyable following AC1 Dubins'})
 xticklabels(ax4,{})
 
 
@@ -120,7 +120,7 @@ xlabel('time (s)')
 
 yyaxis left
 ax5.YAxis(1).Color = 'black';
-axis([300 2200 4000 12000])
+axis([0 1900 4000 12000])
 ylabel('distance (m)')
 grid on
 hold on
@@ -131,10 +131,10 @@ plot([1 mon.lastTime],[5556 5556],'--','LineWidth',1,'Color',[0.5 0.5 0.5]);
 
  yyaxis right
 ax5.YAxis(2).Color = 'black';
-axis([300 2200 convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
+axis([0 1900 convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
 ylabel('distance (NM)') 
 
-legend({'AC5 flyable to closest AC flyable','conflict distance'},'Location','northeast')
+legend({'AC1 flyable to closest AC flyable','conflict distance'},'Location','northeast')
 
 
 
@@ -155,7 +155,7 @@ else
 end
 grid on
 hold on
-axis([300 2200 3 11])
+axis([0 1900 0 11])
 xlabel('time (s)')
 ylabel('closest AC (id)')
 
