@@ -30,7 +30,7 @@ ax1 = nexttile;
 
 yyaxis left
 ax1.YAxis(1).Color = 'black';
-axis([0 1900 0 2500])
+axis([0 2000 0 2500])
 ylabel('altitude (m)')
 grid on
 hold on
@@ -50,7 +50,7 @@ text(1839,1500,{'Reinjection','Point'},...
 
 yyaxis right
 ax1.YAxis(2).Color = 'black';
-axis([0 1900 0 convlength(2500,'m','ft')])
+axis([0 2000 0 convlength(2500,'m','ft')])
 ylabel('altitude (ft)') 
 
 legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
@@ -62,7 +62,7 @@ ax2 = nexttile;
 
 yyaxis left
 ax2.YAxis(1).Color = 'black';
-axis([0 1900 -12 0])
+axis([0 2000 -12 0])
 ylabel('heading (rad)')
 grid on
 hold on
@@ -72,7 +72,7 @@ plot(1:mon.lastTime,psi, '-' ,'LineWidth',1)
 
 yyaxis right
 ax2.YAxis(2).Color = 'black';
-axis([0 1900 convang(-12,'rad','deg') 0])
+axis([0 2000 convang(-12,'rad','deg') 0])
 ylabel('heading (deg)') 
 
 legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
@@ -84,7 +84,7 @@ ax3 = nexttile;
 
 yyaxis left
 ax3.YAxis(1).Color = 'black';
-axis([0 1900 0 140])
+axis([0 2000 0 140])
 ylabel('forward speed (m/s)')
 grid on
 hold on
@@ -94,7 +94,7 @@ plot(1:mon.lastTime,Vhor, '-' ,'LineWidth',1)
  
 yyaxis right
 ax3.YAxis(2).Color = 'black';
-axis([0 1900 0 convvel(140,'m/s','kts')])
+axis([0 2000 0 convvel(140,'m/s','kts')])
 ylabel('forward speed (kt)') 
 
 legend({'AC1 Dubins','AC1 flyable'},'Location','southwest')
@@ -105,7 +105,7 @@ xticklabels(ax3,{})
 ax4 = nexttile;
 grid on
 hold on
-axis([0 1900 0 450])
+axis([0 2000 0 450])
 ylabel('tracking error (m)')
 
 plot(1:mon.lastTime,dist,'-' ,'LineWidth',1)
@@ -120,7 +120,7 @@ xlabel('time (s)')
 
 yyaxis left
 ax5.YAxis(1).Color = 'black';
-axis([0 1900 4000 12000])
+axis([0 2000 4000 12000])
 ylabel('distance (m)')
 grid on
 hold on
@@ -131,7 +131,7 @@ plot([1 mon.lastTime],[5556 5556],'--','LineWidth',1,'Color',[0.5 0.5 0.5]);
 
  yyaxis right
 ax5.YAxis(2).Color = 'black';
-axis([0 1900 convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
+axis([0 2000 convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
 ylabel('distance (NM)') 
 
 legend({'AC1 flyable to closest AC flyable','conflict distance'},'Location','northeast')
@@ -155,7 +155,7 @@ else
 end
 grid on
 hold on
-axis([0 1900 0 11])
+axis([0 2000 0 11])
 xlabel('time (s)')
 ylabel('closest AC (id)')
 
