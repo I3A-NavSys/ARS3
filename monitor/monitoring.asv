@@ -2,10 +2,10 @@
 clear; clc;
 
 mon = MONITORclass("logAC.csv");
-[posX,posY,posZ,psi,Vhor]      = mon.ACinfo(1,false);
-[posXd,posYd,posZd,psid,Vhord] = mon.ACinfo(1,true);
-[dist,distXY,distZ] = mon.dist2ref(1);
-[cdist,~,~,closestAC,~] = mon.dist2ACs(1,30);
+[posX,posY,posZ,psi,Vhor]      = mon.ACinfo(2,false);
+[posXd,posYd,posZd,psid,Vhord] = mon.ACinfo(2,true);
+[dist,distXY,distZ] = mon.dist2ref(2);
+[cdist,~,~,closestAC,~] = mon.dist2ACs(2,30);
 
 
 figHandler = findobj('Type','figure','Name','AC1')';
