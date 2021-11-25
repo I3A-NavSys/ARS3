@@ -23,51 +23,78 @@ else
 end
 
 % Vector de tiempos en que cambia de WP
-tiempos = [236 550 684 737 913 1167 1533 1586 1640 1918];
-labels  = ["TOLSU (IAF)","MARTIN","MG403","MG402 (IF)","MG401 (FAP)",...
-    "Missed approach","WPi1","WPi2","WPi3","RWY13 (LTP)","RWY13"];
+tiemposProg = [236 550 684 737 913 1167 1533 1586 1640 1918];
+tiemposCte  = [236 550 684 747 923 1209 1513 1553 1591 1651];
+labels  = {"TOLSU (IAF)","MARTIN","MG403","MG402 (IF)","MG401 (FAP)",...
+    "Missed approach","WPi1","WPi2","WPi3","RWY13 (LTP)"};
+labelsCte  = {"","","","","",...
+    "","WPi1","WPi2","WPi3","RWY13 (LTP)"};
 vector_timecte = logDcte(1:l,1);
 vector_vhorRcte = logRcte(1:l,8);
 vector_vhorDcte = logDcte(1:l,8);
+
+% diff = length(vector_timecte) - length(vector_time);
+% if diff>0
+%     vector_time = vector_timecte;
+%     vector_vhorD = [vector_vhorD; zeros(diff,1)];
+% else
+%     vector_vhorDcte = [vector_vhorDcte; zeros(-1*diff,1)];
+% end
 
 figHandler = findobj('Type','figure','Name','Velocidad horizontal')';
 if isempty(figHandler)
     figure( ...
         'Name','Velocidad horizontal', ...
         'NumberTitle','off',   ...
-        'Position',[400 00 1000 1000]); 
+        'Position',[400 00 1000 600]); 
 else
     figure(figHandler)
     clf
 end
-tl = tiledlayout(2,1);
-%tl.Padding = 'none';
-tl.TileSpacing = 'none';
-
-ax1 = nexttile;
+% tl = tiledlayout(2,1);
+% %tl.Padding = 'none';
+% tl.TileSpacing = 'none';
+% 
+% ax1 = nexttile;
 
 hold on
 grid on
-%plot(vector_time,vector_vhorR,'linewidth',1)
-plot(vector_time,vector_vhorD,'linewidth',1)
-for i=1:length(tiempos)
-    xl = xline(tiempos(i),'--',{labels(i)},'linewidth',0.5)
-    xl.LabelVerticalAlignment = 'bottom';
-    xl.LabelHorizontalAlignment = 'left';
-end
-title('Velocidad horizontal del avión reinyectado con velocidad progresiva')
-%legend('Avión real','Avión Dubins')
-ylabel('Velocidad horizontal (m/s)')
-xlabel('Tiempo (s)')
-axis([0 vector_time(end) 0 140])
-
-ax2 = nexttile;
-hold on
-grid on
+% ax2 = nexttile;
+% hold on
+% grid on
 %plot(vector_timecte,vector_vhorRcte,'linewidth',1)
-plot(vector_timecte,vector_vhorDcte,'linewidth',1)
-title('Velocidad horizontal del avión reinyectado con velocidad cte')
-%legend('Avión real','Avión Dubins')
-ylabel('Velocidad horizontal (m/s)')
-xlabel('Tiempo (s)')
+plot(vector_timecte,vector_vhorDcte,'r','linewidth',1)
+% %legend('Avión real','Avión Dubins')
+% ylabel('Velocidad horizontal (m/s)')
+% xlabel('Tiempo (s)')
+% axis([0 vector_time(end) 0 140])
+
+%plot(vector_time,vector_vhorR,'linewidth',1)
+plot(vector_time,vector_vhorD,'b','linewidth',1)
+
+    
+    %     xl = xline(tiempos(i),'--',{labels(i)},'linewidth',0.5);
+%     xl.LabelVerticalAlignment = 'bottom';
+%     xl.LabelHorizontalAlignment = 'left';
+
+title('Horizontal speed of reinyected aircraft')
+
+ylabel('Speed (m/s)')
+xlabel('Time (s)')
 axis([0 vector_time(end) 0 140])
+
+
+
+plot(tiemposCte,vector_vhorDcte(tiemposCte),'or','linewidth',1)
+t1 = text(tiemposCte,vector_vhorDcte(tiemposCte)+3,labelsCte,'VerticalAlignment','top','HorizontalAlignment','left','rotation',90,'Color','k');
+t1(end).Color = 'r';
+t1(end-1).Color = 'r';
+t1(end-2).Color = 'r';
+t1(end-3).Color = 'r';
+plot(tiemposProg,vector_vhorD(tiemposProg),'ob','linewidth',1)
+t = text(tiemposProg,vector_vhorD(tiemposProg)-3,labels,'VerticalAlignment','bottom','HorizontalAlignment','right','rotation',90,'Color','k');
+t(end).Color = 'b';
+t(end-1).Color = 'b';
+t(end-2).Color = 'b';
+t(end-3).Color = 'b';
+legend('Constant speed','Progresive speed','Location','southwest')
