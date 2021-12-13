@@ -26,7 +26,7 @@ end
 
 methods
 
-function [posX,posY,posZ,psi,Vhor] = ACinfo(obj,ACid,isDubins)
+function [posX,posY,posZ,psi,Vhor,Acel] = ACinfo(obj,ACid,isDubins)
 
 % ACid: avion a analizar seguimiento
 % isDubins: diferencia entre aviones reales y referencias Dubins
@@ -40,6 +40,7 @@ function [posX,posY,posZ,psi,Vhor] = ACinfo(obj,ACid,isDubins)
     posZ      = posX;       % -eje Z
     psi       = posX;       % -rotacion Psi
     Vhor      = posX;       % -velocidad horizontal
+    Acel      = posX;       % -aceleracion
     
     for i = 1:obj.numRows
         if obj.log(i,2) ~= ACid
@@ -55,7 +56,7 @@ function [posX,posY,posZ,psi,Vhor] = ACinfo(obj,ACid,isDubins)
             end
         end
         
-        iAC = obj.log(i,4:8);
+        iAC = obj.log(i,4:9);
 
         currentTime = obj.log(i,1);
         posX(currentTime)    = iAC(1);
@@ -63,6 +64,7 @@ function [posX,posY,posZ,psi,Vhor] = ACinfo(obj,ACid,isDubins)
         posZ(currentTime)    = iAC(3);
         psi(currentTime)     = iAC(4);
         Vhor(currentTime)    = iAC(5);
+        Acel(currentTime)    = iAC(6);
 
     end
 end

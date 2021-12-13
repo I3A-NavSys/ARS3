@@ -1,4 +1,4 @@
-log = csvread("logAC1.90s.velProg.csv");
+log = csvread("logAC.csv");
 logcte = csvread("logAC1.90s.velCte.csv");
 %Filtramos datos específicos de la aeronave 1
 log  = log(log(:,2)==1,:);
@@ -23,12 +23,11 @@ else
 end
 
 % Vector de tiempos en que cambia de WP
-tiemposProg = [236 550 684 737 913 1167 1533 1586 1640 1918];
+tiemposProg = [236 550 684 737 913 1167 1281 1526 1579 1631 1920];
 tiemposCte  = [236 550 684 747 923 1209 1513 1553 1591 1651];
-labels  = {"TOLSU (IAF)","MARTIN","MG403","MG402 (IF)","MG401 (FAP)",...
-    "Missed approach","WPi1","WPi2","WPi3","RWY13 (LTP)"};
-labelsCte  = {"","","","","",...
-    "","WPi1","WPi2","WPi3","RWY13 (LTP)"};
+labels  = ["TOLSU (IAF)","MARTIN","MG403","MG402 (IF)","MG401 (FAP)",...
+    "Missed approach","WPi1","WPi2","WPi3","WPi4","RWY13 (LTP)"];
+labelsCte  = ["","","","","","","WPi1","WPi2","WPi3","RWY13 (LTP)"];
 vector_timecte = logDcte(1:l,1);
 vector_vhorRcte = logRcte(1:l,8);
 vector_vhorDcte = logDcte(1:l,8);
@@ -77,10 +76,10 @@ plot(vector_time,vector_vhorD,'b','linewidth',1)
 %     xl.LabelVerticalAlignment = 'bottom';
 %     xl.LabelHorizontalAlignment = 'left';
 
-title('Horizontal speed of reinyected aircraft')
+title('Horizontal speed of reinjected aircraft','FontSize',18)
 
-ylabel('Speed (m/s)')
-xlabel('Time (s)')
+ylabel('Speed (m/s)','FontSize',14)
+xlabel('Time (s)','FontSize',14)
 axis([0 vector_time(end) 0 140])
 
 
@@ -97,4 +96,5 @@ t(end).Color = 'b';
 t(end-1).Color = 'b';
 t(end-2).Color = 'b';
 t(end-3).Color = 'b';
-legend('Constant speed','Progresive speed','Location','southwest')
+t(end-4).Color = 'b';
+legend('Constant speed','Progresive speed','Location','southwest','FontSize',12)
