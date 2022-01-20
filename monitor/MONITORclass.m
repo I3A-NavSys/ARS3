@@ -65,7 +65,7 @@ function [posX,posY,posZ,psi,Vhor,Acel] = ACinfo(obj,ACid,isDubins)
         psi(currentTime)     = iAC(4);
         Vhor(currentTime)    = iAC(5);
         Acel(currentTime)    = iAC(6);
-
+        %Acel(currentTime)    = 0;
     end
 end
 
