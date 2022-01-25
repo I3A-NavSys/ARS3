@@ -56,24 +56,17 @@ function [posX,posY,posZ,psi,Vhor,Acel] = ACinfo(obj,ACid,isDubins)
             end
         end
         
+        if obj.log
+        iAC = obj.log(i,4:9);
+
         currentTime = obj.log(i,1);
-        if length(obj.log(i,:)) == 8
-            % Los logs generados antes de implementar la velocidad
-            % progresiva solo tienen 8 columnas.
-            iAC = obj.log(i,4:8);
-            Acel(currentTime)    = 0;
-        else
-            % Los logs generados después tienen una más, la de la
-            % aceleración.
-            iAC = obj.log(i,4:9);
-            Acel(currentTime)    = iAC(6);
-        end
-        
         posX(currentTime)    = iAC(1);
         posY(currentTime)    = iAC(2);
         posZ(currentTime)    = iAC(3);
         psi(currentTime)     = iAC(4);
         Vhor(currentTime)    = iAC(5);
+        Acel(currentTime)    = iAC(6);
+        %Acel(currentTime)    = 0;
     end
 end
 
