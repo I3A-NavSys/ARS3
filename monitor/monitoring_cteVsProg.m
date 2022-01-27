@@ -1,7 +1,7 @@
 %% CARGA DE DATOS
 clear; clc;
 
-mon    = MONITORclass("logAC1.90s.velProg.csv");
+mon    = MONITORclass("logAC.csv");
 monCte = MONITORclass("logAC1.90s.velCte.csv");
 [posX,posY,posZ,psi,Vhor,Acel]             = mon.ACinfo(1,false);
 [posXCte,posYCte,posZCte,psiCte,VhorCte,~] = monCte.ACinfo(1,false);

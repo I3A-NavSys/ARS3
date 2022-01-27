@@ -11,10 +11,10 @@ for i=1:mon.lastTime-1
     Acel(i) = Vhor(i+1)-Vhor(i);
 end
 Acel(mon.lastTime) = Acel(mon.lastTime-1);
-% for i=1:mon.lastTime-1
-%     Aceld(i) = Vhord(i+1)-Vhord(i);
-% end
-% Aceld(mon.lastTime) = Aceld(mon.lastTime-1);
+for i=1:mon.lastTime-1
+    Aceld(i) = Vhord(i+1)-Vhord(i);
+end
+Aceld(mon.lastTime) = Aceld(mon.lastTime-1);
 
 % Array de tiempos en que se cambia de WP
 % VELOCIDAD PROGRESIVA
@@ -141,7 +141,7 @@ ax4 = nexttile;
 
 
 ax4.YAxis(1).Color = 'black';
-axis([800 2000  -20 20])
+axis([800 2000  -1 1])
 ylabel('acceleration (m/s^{2})');
 % grid on
 hold on
