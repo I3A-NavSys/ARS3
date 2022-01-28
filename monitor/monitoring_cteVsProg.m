@@ -1,7 +1,7 @@
 %% CARGA DE DATOS
 clear; clc;
 
-mon    = MONITORclass("logAC.csv");
+mon    = MONITORclass("logAC1.90s.velProg.csv");
 monCte = MONITORclass("logAC1.90s.velCte.csv");
 [posX,posY,posZ,psi,Vhor,Acel]             = mon.ACinfo(1,false);
 [posXCte,posYCte,posZCte,psiCte,VhorCte,~] = monCte.ACinfo(1,false);
@@ -54,6 +54,11 @@ tl.TileSpacing = 'none';
 %% GRAFICA DE ALTURA
 ax1 = nexttile;
 
+yyaxis right
+ax1.YAxis(2).Color = 'black';
+axis([800 2000  0 convlength(2500,'m','ft')])
+ylabel('altitude (ft)') 
+
 yyaxis left
 ax1.YAxis(1).Color = 'black';
 axis([800 2000  0 2500])
@@ -66,16 +71,16 @@ plot(1:mon.lastTime,posZ, '-' ,'LineWidth',1)
 plot(waypointsCte,posZCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,posZ(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-yyaxis right
-ax1.YAxis(2).Color = 'black';
-axis([800 2000  0 convlength(2500,'m','ft')])
-ylabel('altitude (ft)') 
-
 legend({'Constant speed','Progressive speed'},'Location','northwest')
 xticklabels(ax1,{})
 
 %% GRAFICA DE RUMBO
 ax2 = nexttile;
+
+yyaxis right
+ax2.YAxis(2).Color = 'black';
+axis([800 2000  convang(-12,'rad','deg') convang(-2,'rad','deg')])
+ylabel('heading (deg)') 
 
 yyaxis left
 ax2.YAxis(1).Color = 'black';
@@ -89,16 +94,16 @@ plot(1:mon.lastTime,psi, '-' ,'LineWidth',1)
 plot(waypointsCte,psiCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,psi(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-yyaxis right
-ax2.YAxis(2).Color = 'black';
-axis([800 2000  convang(-12,'rad','deg') convang(-2,'rad','deg')])
-ylabel('heading (deg)') 
-
 legend({'Constant speed','Progressive speed'},'Location','northeast')
 xticklabels(ax2,{})
 
 %% GRAFICA DE VELOCIDAD
 ax3 = nexttile;
+
+yyaxis right
+ax3.YAxis(2).Color = 'black';
+axis([800 2000  0 convvel(140,'m/s','kts')])
+ylabel('forward speed (kt)') 
 
 yyaxis left
 ax3.YAxis(1).Color = 'black';
@@ -112,10 +117,6 @@ plot(1:mon.lastTime,Vhor, '-' ,'LineWidth',1)
 plot(waypointsCte,VhorCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,Vhor(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-yyaxis right
-ax3.YAxis(2).Color = 'black';
-axis([800 2000  0 convvel(140,'m/s','kts')])
-ylabel('forward speed (kt)') 
 
 legend({'Constant speed','Progressive speed'},'Location','southwest')
 xticklabels(ax3,{})
@@ -123,10 +124,16 @@ xticklabels(ax3,{})
 %% GRAFICA DE ACELERACION
 ax4 = nexttile;
 
+yyaxis right
+ax4.YAxis(2).Color = 'black';
+axis([800 2000  -10/9.8 10/9.8])
+ylabel('acceleration (G)')
+
+yyaxis left
 ax4.YAxis(1).Color = 'black';
-axis([800 2000  -1 1])
+axis([800 2000  -10 10])
 ylabel('acceleration (m/s^{2})');
-% grid on
+
 hold on
 
 plot(1:monCte.lastTime,AcelCte,'-r','LineWidth',1)
@@ -134,6 +141,8 @@ plot(1:mon.lastTime,Acel, '-','Color','#0072BD' ,'LineWidth',1)
 
 plot(waypointsCte,AcelCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,Acel(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
+
+ 
 
 legend({'Constant speed','Progressive speed'},'Location','northeast')
 xticklabels(ax4,{})
