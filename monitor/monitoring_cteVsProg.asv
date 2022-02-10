@@ -155,13 +155,8 @@ axis([800 2000  0 300])
 ylabel('tracking error (m)')
 
 plot(1:monCte.lastTime,distCte,'-r' ,'LineWidth',1)
-disp("Area tracking error cte: ");
-disp( trapz (1209:1591 , distCte(1209:1591)));
-disp( trapz (1:1979 , distCte(1:1979)));
+AUC = trapz (X , y) 
 plot(1:mon.lastTime,dist,'-','Color','#0072BD' ,'LineWidth',1)
-disp("Area tracking error prog: ");
-disp(trapz (1167:1631 , dist(1167:1631)));
-disp( trapz (1:1979 , dist(1:1979)));
 
 plot(waypointsCte,distCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,dist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
