@@ -156,8 +156,8 @@ ax5 = nexttile;
 
 yyaxis right
 ax5.YAxis(2).Color = 'black';
-axis([800 2000  0 0.161987])
-ylabel('tracking error (NM)')
+axis([800 2000  -10/9.8 10/9.8])
+ylabel('acceleration (G)')
 
 yyaxis left
 ax5.YAxis(1).Color = 'black';
@@ -184,11 +184,6 @@ xticklabels(ax5,{})
 %% GRAFICA DE DISTANCIA DE LA AERONAVE REAL 1 AL RESTO DE AERONAVES REALES
 ax6 = nexttile;
 
-yyaxis right
-ax6.YAxis(2).Color = 'black';
-axis([800 2000  convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
-ylabel('distance (NM)') 
-
 xlabel('time (s)')
 yyaxis left
 ax6.YAxis(1).Color = 'black';
@@ -202,6 +197,11 @@ plot([1 mon.lastTime],[5556 5556],'-.','LineWidth',1,'Color',[0.5 0.5 0.5]);
 
 plot(waypointsCte,cdistCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,cdist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
+
+yyaxis right
+ax6.YAxis(2).Color = 'black';
+axis([800 2000  convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
+ylabel('distance (NM)') 
 
 legend({'Constant speed','Progressive speed','conflict distance'},'Location','northeast')
 
