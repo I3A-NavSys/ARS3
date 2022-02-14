@@ -1,7 +1,7 @@
 %% CARGA DE DATOS
 clear; clc;
 
-mon    = MONITORclass("logAC1.90s.velProg.csv");
+mon    = MONITORclass("logAC.csv");
 monCte = MONITORclass("logAC1.90s.velCte.csv");
 [posX,posY,posZ,psi,Vhor,Acel]             = mon.ACinfo(1,false);
 [posXCte,posYCte,posZCte,psiCte,VhorCte,~] = monCte.ACinfo(1,false);
@@ -22,7 +22,11 @@ AcelCte(monCte.lastTime) = AcelCte(monCte.lastTime-1);
 % Array de tiempos en que se cambia de WP
 % VELOCIDAD PROGRESIVA
 % logAC1.90s.velProg.csv
-waypoints = [236 550 684 737 913 1167 1281 1526 1579 1631 1637 1920];
+% waypoints = [236 550 684 737 913 1167 1281 1526 1579 1631 1637 1920];
+% labels  = ["" "TOLSU (IAF)";"" "MARTIN"; "" "MG403"; "" "MG402 (IF)";"MG401" "(FAP)";...
+%     "" "Missed approach";"" "WPi1"; "" "WPi2";"" "WPi3"; "" "WPi4";"MG401" "(FAP)";"" "RWY13 (LTP)"];
+% logAC1.90s.velProg.csv Velocidad XILVI
+waypoints = [236 550 684 737 913 1167 1260 1498 1549 1603 1648 1929];
 labels  = ["" "TOLSU (IAF)";"" "MARTIN"; "" "MG403"; "" "MG402 (IF)";"MG401" "(FAP)";...
     "" "Missed approach";"" "WPi1"; "" "WPi2";"" "WPi3"; "" "WPi4";"MG401" "(FAP)";"" "RWY13 (LTP)"];
 % logAC1.80s.velProg.csv
@@ -150,13 +154,26 @@ xticklabels(ax4,{})
 %% GRAFICA DE DISTANCIA ENTRE AERONAVE REAL Y DUBINS
 ax5 = nexttile;
 
-hold on
+yyaxis right
+ax5.YAxis(2).Color = 'black';
+axis([800 2000  -10/9.8 10/9.8])
+ylabel('acceleration (G)')
+
+yyaxis left
+ax5.YAxis(1).Color = 'black';
 axis([800 2000  0 300])
 ylabel('tracking error (m)')
 
+hold on
+
 plot(1:monCte.lastTime,distCte,'-r' ,'LineWidth',1)
-AUC = trapz (X , y) 
+disp("Area tracking error cte: ");
+disp( trapz (1209:1591 , distCte(1209:1591)));
+disp( trapz (1:1979 , distCte(1:1979)));
 plot(1:mon.lastTime,dist,'-','Color','#0072BD' ,'LineWidth',1)
+disp("Area tracking error prog: ");
+disp(trapz (1167:1631 , dist(1167:1631)));
+disp( trapz (1:1979 , dist(1:1979)));
 
 plot(waypointsCte,distCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,dist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')

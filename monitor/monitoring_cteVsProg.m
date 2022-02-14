@@ -1,7 +1,7 @@
 %% CARGA DE DATOS
 clear; clc;
 
-mon    = MONITORclass("logAC1.90s.velProg.csv");
+mon    = MONITORclass("logAC.csv");
 monCte = MONITORclass("logAC1.90s.velCte.csv");
 [posX,posY,posZ,psi,Vhor,Acel]             = mon.ACinfo(1,false);
 [posXCte,posYCte,posZCte,psiCte,VhorCte,~] = monCte.ACinfo(1,false);
@@ -22,7 +22,11 @@ AcelCte(monCte.lastTime) = AcelCte(monCte.lastTime-1);
 % Array de tiempos en que se cambia de WP
 % VELOCIDAD PROGRESIVA
 % logAC1.90s.velProg.csv
-waypoints = [236 550 684 737 913 1167 1281 1526 1579 1631 1637 1920];
+% waypoints = [236 550 684 737 913 1167 1281 1526 1579 1631 1637 1920];
+% labels  = ["" "TOLSU (IAF)";"" "MARTIN"; "" "MG403"; "" "MG402 (IF)";"MG401" "(FAP)";...
+%     "" "Missed approach";"" "WPi1"; "" "WPi2";"" "WPi3"; "" "WPi4";"MG401" "(FAP)";"" "RWY13 (LTP)"];
+% logAC1.90s.velProg.csv Velocidad XILVI
+waypoints = [236 550 684 737 913 1167 1260 1498 1549 1603 1648 1929];
 labels  = ["" "TOLSU (IAF)";"" "MARTIN"; "" "MG403"; "" "MG402 (IF)";"MG401" "(FAP)";...
     "" "Missed approach";"" "WPi1"; "" "WPi2";"" "WPi3"; "" "WPi4";"MG401" "(FAP)";"" "RWY13 (LTP)"];
 % logAC1.80s.velProg.csv
@@ -150,9 +154,17 @@ xticklabels(ax4,{})
 %% GRAFICA DE DISTANCIA ENTRE AERONAVE REAL Y DUBINS
 ax5 = nexttile;
 
-hold on
+yyaxis right
+ax5.YAxis(2).Color = 'black';
+axis([800 2000  0 0.161987])
+ylabel('tracking error (NM)')
+
+yyaxis left
+ax5.YAxis(1).Color = 'black';
 axis([800 2000  0 300])
 ylabel('tracking error (m)')
+
+hold on
 
 plot(1:monCte.lastTime,distCte,'-r' ,'LineWidth',1)
 disp("Area tracking error cte: ");
@@ -172,6 +184,11 @@ xticklabels(ax5,{})
 %% GRAFICA DE DISTANCIA DE LA AERONAVE REAL 1 AL RESTO DE AERONAVES REALES
 ax6 = nexttile;
 
+yyaxis right
+ax6.YAxis(2).Color = 'black';
+axis([800 2000  convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
+ylabel('distance (NM)') 
+
 xlabel('time (s)')
 yyaxis left
 ax6.YAxis(1).Color = 'black';
@@ -185,11 +202,6 @@ plot([1 mon.lastTime],[5556 5556],'-.','LineWidth',1,'Color',[0.5 0.5 0.5]);
 
 plot(waypointsCte,cdistCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
 plot(waypoints,cdist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
-
-yyaxis right
-ax6.YAxis(2).Color = 'black';
-axis([800 2000  convlength(4000,'m','naut mi') convlength(12000,'m','naut mi')])
-ylabel('distance (NM)') 
 
 legend({'Constant speed','Progressive speed','conflict distance'},'Location','northeast')
 
