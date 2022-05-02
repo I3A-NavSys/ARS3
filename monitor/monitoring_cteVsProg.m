@@ -67,13 +67,13 @@ axis([waypoints(3)-5 waypoints(end)  0 2000])
 ylabel('altitude (m)')
 hold on
 grid on
-plot(1:monCte.lastTime,posZCte,'-r','LineWidth',1)
+plot(1:monCte.lastTime,posZCte,'-', 'Color','#D95319','LineWidth',1)
 plot(1:mon.lastTime,posZ, '-' ,'LineWidth',1)
 
-plot(waypointsCte,posZCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,posZCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,posZ(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-legend({'Constant speed','Progressive speed'},'Location','northeast')
+legend({'Constant speed','Phased-in speed'},'Location','northeast')
 xticklabels(ax0,{})
 
 %% GRAFICA DE VELOCIDAD VERTICAL
@@ -90,10 +90,10 @@ axis([waypoints(3)-5 waypoints(end)  -10 10])
 ylabel('Vertical speed (m/s)')
 hold on
 grid on
-plot(1:monCte.lastTime,VverCte,'-r','LineWidth',1)
+plot(1:monCte.lastTime,VverCte,'-', 'Color','#D95319','LineWidth',1)
 plot(1:mon.lastTime,Vver, '-' ,'LineWidth',1)
 
-plot(waypointsCte,VverCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,VverCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,Vver(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 hold off
 %legend({'Constant speed','Progressive speed'},'Location','northwest')
@@ -114,10 +114,10 @@ axis([waypoints(3)-5 waypoints(end)  -12 -2])
 ylabel('heading (rad)')
 hold on
 grid on
-plot(1:monCte.lastTime,psiCte,'-r','LineWidth',1)
+plot(1:monCte.lastTime,psiCte,'-', 'Color','#D95319','LineWidth',1)
 plot(1:mon.lastTime,psi, '-' ,'LineWidth',1)
 
-plot(waypointsCte,psiCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,psiCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,psi(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
 %legend({'Constant speed','Progressive speed'},'Location','northeast')
@@ -137,10 +137,10 @@ axis([waypoints(3)-5 waypoints(end)  0 140])
 ylabel('forward speed (m/s)')
 hold on
 grid on
-plot(1:monCte.lastTime,VhorCte,'-r','LineWidth',1)
+plot(1:monCte.lastTime,VhorCte,'-', 'Color','#D95319','LineWidth',1)
 plot(1:mon.lastTime,Vhor, '-' ,'LineWidth',1)
 
-plot(waypointsCte,VhorCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,VhorCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,Vhor(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
 
@@ -162,10 +162,10 @@ ylabel('acceleration (m/s^{2})');
 
 hold on
 grid on
-plot(1:monCte.lastTime,AcelCte,'-r','LineWidth',1)
+plot(1:monCte.lastTime,AcelCte,'-', 'Color','#D95319','LineWidth',1)
 plot(1:mon.lastTime,Acel, '-','Color','#0072BD' ,'LineWidth',1)
 
-plot(waypointsCte,AcelCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,AcelCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,Acel(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
  
@@ -188,7 +188,7 @@ ylabel('tracking error (m)')
 
 hold on
 grid on
-plot(1:monCte.lastTime,distCte,'-r' ,'LineWidth',1)
+plot(1:monCte.lastTime,distCte,'-', 'Color','#D95319' ,'LineWidth',1)
 % disp("Area tracking error cte: ");
 % disp( trapz (1209:1591 , distCte(1209:1591)));
 % disp( trapz (1:1979 , distCte(1:1979)));
@@ -197,10 +197,10 @@ plot(1:mon.lastTime,dist,'-','Color','#0072BD' ,'LineWidth',1)
 % disp(trapz (1167:1631 , dist(1167:1631)));
 % disp( trapz (1:1979 , dist(1:1979)));
 
-plot(waypointsCte,distCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,distCte(waypointsCte), 'o', 'Color','#D95319', 'MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,dist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-%legend({'Constant speed','Progressive speed'},'Location','northwest')
+%legend({'Stepped speed','Progressive speed'},'Location','northwest')
 xticklabels(ax5,{})
 
 %% GRAFICA DE DISTANCIA DE LA AERONAVE REAL 1 AL RESTO DE AERONAVES REALES
@@ -219,13 +219,13 @@ ylabel('distance (m)')
 hold on
 grid on
 plot([1 mon.lastTime],[5556 5556],'-.','LineWidth',1,'Color',[0.5 0.5 0.5]);
-plot(1:monCte.lastTime,cdistCte,'-r' ,'LineWidth',1)
+plot(1:monCte.lastTime,cdistCte,'-', 'Color','#D95319' ,'LineWidth',1)
 plot(1:mon.lastTime,cdist,'-' ,'LineWidth',1)
 
-plot(waypointsCte,cdistCte(waypointsCte), 'or', 'MarkerSize', 3, 'MarkerFaceColor', 'r')
+plot(waypointsCte,cdistCte(waypointsCte), 'o', 'Color','#D95319','MarkerSize', 3, 'MarkerFaceColor', '#D95319')
 plot(waypoints,cdist(waypoints), 'o', 'MarkerSize', 3, 'MarkerFaceColor', '#0072BD')
 
-legend('conflict distance','Location','northeast')
+legend('Conflict distance','Location','northeast')
 
 
 
