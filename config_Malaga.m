@@ -115,7 +115,7 @@ end
 
 %%
 clear i XYZ
-clear WP_gmsf WP_gf numWP
+%clear WP_gmsf WP_gf numWP
 clear runway_lar runway_anc runway_lat runway_lon runway_alt runway_ori dcm 
 
 
