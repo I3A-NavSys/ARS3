@@ -21,7 +21,7 @@ axis([-40000 +40000 -10000 +70000 0 3000]) % para Málaga
 %   axis([-70000 +30000 -30000 +70000 0 4000]) % para Houston
 
 % runway
-global runway_pts
+
 hRW = patch(axesHandler,      ...
    'Vertices', runway_pts,    ...
    'Faces',    [1 2 3 4],     ...
@@ -31,7 +31,6 @@ hRW = patch(axesHandler,      ...
   %'LineStyle','none',        
 
 % waypoints
-global WP WPlabels
 line(WP(2:7,1), WP(2:7,2), WP(2:7,3), 'linewidth', 2); % para Málaga
 for i = 1:length(WP)
     t = text(WP(i,1)+1000, WP(i,2), WP(i,3), WPlabels(i));

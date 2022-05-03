@@ -112,11 +112,19 @@ for i = 1:numWP
     WP(i,3) = -XYZ(3);
 end
 
+%% Carga los datos de los vuelos reales
+maxLat = max(WP_gf(:,1)); % TODO: dejar un poco de margen luego
+minLat = min(WP_gf(:,1));
+maxLon = max(WP_gf(:,2));
+minLon = min(WP_gf(:,2));
 
-%%
+global pseudoWP
+pseudoWP = load_data(".\data\LEMG.xlsx",[maxLat minLat maxLon minLon],[runway_lat runway_lon]);
+
+%% Borra variables que ya no se van a usar
 clear i XYZ
-%clear WP_gmsf WP_gf numWP
-clear runway_lar runway_anc runway_lat runway_lon runway_alt runway_ori dcm 
+clear WP_gmsf numWP WP_gf
+clear runway_lar runway_anc runway_alt runway_ori dcm runway_lat runway_lon
 
 
 %% Información sobre el avión que aborta
