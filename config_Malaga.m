@@ -118,9 +118,10 @@ minLat = min(WP_gf(:,1));
 maxLon = max(WP_gf(:,2));
 minLon = min(WP_gf(:,2));
 
-global pseudoWP
-pseudoWP = load_data(".\data\LEMG.xlsx",[maxLat minLat maxLon minLon],[runway_lat runway_lon]);
-
+global WP1
+WP1 = load_data(".\data\LEMG.xlsx",[maxLat minLat maxLon minLon],[runway_lat runway_lon]);
+global n_data
+n_data = max(length(WP1));
 %% Borra variables que ya no se van a usar
 clear i XYZ
 clear WP_gmsf numWP WP_gf
