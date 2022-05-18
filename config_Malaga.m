@@ -121,7 +121,7 @@ minLon = min(WP_gf(:,2));
 global WP1
 WP1 = load_data(".\data\LEMG.xlsx",[maxLat minLat maxLon minLon],[runway_lat runway_lon]);
 global n_data
-n_data = max(length(WP1));
+n_data = WP1(end,7);
 %% Borra variables que ya no se van a usar
 clear i XYZ
 clear WP_gmsf numWP WP_gf
